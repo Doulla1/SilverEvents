@@ -31,6 +31,23 @@ model User {
   role         Role     @relation("UserRole", fields: [role_id], references: [id])
   events       Event[]  @relation("UserEvents")
   registrations EventRegistration[] @relation("UserRegistrations")
+  sessions     Session[] @relation("UserSessions")
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  session_token String  @unique
+  expires      DateTime
+
+  user         User     @relation("UserSessions", fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model Event {
