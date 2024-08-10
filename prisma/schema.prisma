@@ -13,3 +13,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Role {
+  id         Int      @id @default(autoincrement())
+  role_name  String   @unique
+  users      User[]   @relation("UserRole")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  first_name   String
+  last_name    String
+  email        String   @unique
+  password     String
+  position     String
+  profile_photo String?
+  role_id      Int
+  role         Role     @relation("UserRole", fields: [role_id], references: [id])
+  events       Event[]  @relation("UserEvents")
+  registrations EventRegistration[] @relation("UserRegistrations")
+}
+
+model Event {
+  id           Int       @id @default(autoincrement())
+  title        String
+  start_date   DateTime
+  end_date     DateTime
+  location     String
+  cover_image  String?
+  created_by   Int
+  creator      User      @relation("UserEvents", fields: [created_by], references: [id])
+  registrations EventRegistration[] @relation("EventRegistrations")
+}
+
+model EventRegistration {
+  id           Int      @id @default(autoincrement())
+  event_id     Int
+  user_id      Int
+  registration_date DateTime @default(now())
+
+  event        Event    @relation("EventRegistrations", fields: [event_id], references: [id])
+  user         User     @relation("UserRegistrations", fields: [user_id], references: [id])
+}
