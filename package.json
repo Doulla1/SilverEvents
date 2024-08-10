@@ -33,6 +33,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^5.18.0"
+		"@auth/core": "^0.34.2",
+		"@auth/sveltekit": "^1.4.2",
+		"@prisma/client": "^5.18.0",
+		"bcrypt": "^5.1.1"
 	}
 }
