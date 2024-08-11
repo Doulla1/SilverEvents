@@ -15,7 +15,6 @@ export async function load({ cookies, locals }) {
 		// Stocker la session dans `locals`
 		locals.session = jwt.verify(token, process.env.JWT_SECRET);
 
-		console.log("on est là !", locals.session);
 		// Retourner la session pour la passer au composant Svelte
 		return { session: locals.session };
 	} catch (err) {
