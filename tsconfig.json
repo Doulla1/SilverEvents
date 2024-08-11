@@ -14,6 +14,7 @@
 		"module": "CommonJS", // CommonJS is typically required for Node.js environments
 		"outDir": "./dist" // Specify output directory for compiled files (if needed)
 	},
+	"include": ["src/**/*.ts", "src/**/*.svelte"], // Include TypeScript and Svelte files
 	"ts-node": {
 		"files": true, // Include files option for ts-node
 		"transpileOnly": true, // Skip type checking to speed up execution

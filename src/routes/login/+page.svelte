@@ -1,5 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { user } from '$lib/stores/user';
+
 	let email = '';
 	let password = '';
 	let errorMessage = '';
@@ -18,6 +20,7 @@
 
 			if (response.ok) {
 				console.log(result);
+				user.set(result.user); // Mettre à jour le store avec les informations de l'utilisateur
 				await goto('/dashboard');
 			} else {
 				errorMessage = result.message;

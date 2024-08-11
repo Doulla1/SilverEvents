@@ -10,3 +10,12 @@ export async function hashPassword(password: string) {
 export async function comparePassword(password: string, hash: string) {
 	return await bcrypt.compare(password, hash);
 }
+
+export function deleteAuthToken(cookies) {
+	cookies.delete('token', {
+		path: '/',
+		httpOnly: true,
+		secure: true,
+		sameSite: 'strict'
+	});
+}

@@ -1,10 +1,24 @@
-<script>
-	export let user = null;
+<script lang="ts">
+	import { user } from '$lib/stores/user';
 
 	let isMenuOpen = false;
 
 	function toggleMenu() {
 		isMenuOpen = !isMenuOpen;
+	}
+
+	async function logout() {
+		const response = await fetch('/logout', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		if (response.ok) {
+			user.set(null); // Mise à jour du store pour réinitialiser l'utilisateur
+			window.location.href = '/login';
+		}
 	}
 </script>
 
@@ -15,13 +29,16 @@
 
 		<!-- Desktop Navigation -->
 		<nav class="hidden md:flex space-x-6">
-			{#if user?.role === 'Admin'}
+			{#if $user?.role === 'admin'}
 				<a href="/dashboard" class="hover:text-indigo-200">Dashboard</a>
 			{/if}
 			<a href="/events" class="hover:text-indigo-200">Événements</a>
 			<a href="/profile" class="hover:text-indigo-200">Profil</a>
-			{#if user}
-				<a href="/logout" class="hover:text-indigo-200">Déconnexion</a>
+			{#if $user}
+				<button on:click={logout} class="hover:text-indigo-200">Déconnexion</button>
+			{/if}
+			{#if !$user}
+				<a href="/login" class="hover:text-indigo-200">Connexion</a>
 			{/if}
 		</nav>
 
@@ -42,13 +59,16 @@
 	<!-- Mobile Navigation -->
 	{#if isMenuOpen}
 		<nav class="md:hidden bg-indigo-700">
-			{#if user?.role === 'admin'}
+			{#if $user?.role === 'admin'}
 				<a href="/dashboard" class="block px-4 py-2 text-sm hover:bg-indigo-500">Dashboard</a>
 			{/if}
 			<a href="/events" class="block px-4 py-2 text-sm hover:bg-indigo-500">Événements</a>
 			<a href="/profile" class="block px-4 py-2 text-sm hover:bg-indigo-500">Profil</a>
-			{#if user}
-				<a href="/logout" class="block px-4 py-2 text-sm hover:bg-indigo-500">Déconnexion</a>
+			{#if $user}
+				<button on:click={logout} class="block w-full text-left px-4 py-2 text-sm hover:bg-indigo-500">Déconnexion</button>
+			{/if}
+			{#if !$user}
+				<a href="/login" class="block px-4 py-2 text-sm hover:bg-indigo-500">Connexion</a>
 			{/if}
 		</nav>
 	{/if}
