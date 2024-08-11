@@ -3,6 +3,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 
 	export let data;
+	console.log(data.session);
 </script>
 
 <div class="flex flex-col min-h-screen">

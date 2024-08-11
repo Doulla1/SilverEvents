@@ -15,7 +15,9 @@
 
 		<!-- Desktop Navigation -->
 		<nav class="hidden md:flex space-x-6">
-			<a href="/dashboard" class="hover:text-indigo-200">Dashboard</a>
+			{#if user?.role === 'Admin'}
+				<a href="/dashboard" class="hover:text-indigo-200">Dashboard</a>
+			{/if}
 			<a href="/events" class="hover:text-indigo-200">Événements</a>
 			<a href="/profile" class="hover:text-indigo-200">Profil</a>
 			{#if user}
@@ -40,7 +42,9 @@
 	<!-- Mobile Navigation -->
 	{#if isMenuOpen}
 		<nav class="md:hidden bg-indigo-700">
-			<a href="/dashboard" class="block px-4 py-2 text-sm hover:bg-indigo-500">Dashboard</a>
+			{#if user?.role === 'admin'}
+				<a href="/dashboard" class="block px-4 py-2 text-sm hover:bg-indigo-500">Dashboard</a>
+			{/if}
 			<a href="/events" class="block px-4 py-2 text-sm hover:bg-indigo-500">Événements</a>
 			<a href="/profile" class="block px-4 py-2 text-sm hover:bg-indigo-500">Profil</a>
 			{#if user}
