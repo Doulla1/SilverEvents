@@ -1,5 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 import { hashPassword } from '../src/lib/auth/auth'; // Assurez-vous que le chemin vers le fichier auth.ts est correct
+import dotenv from 'dotenv';
+
+// Charger les variables d'environnement depuis le fichier .env
+dotenv.config();
+
 
 // Initialiser le client Prisma
 const prisma = new PrismaClient();
