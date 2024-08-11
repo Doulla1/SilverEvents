@@ -6,7 +6,7 @@
 
 	async function login() {
 		try {
-			const response = await fetch('/api/auth', {
+			const response = await fetch('/api/auth/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -17,6 +17,7 @@
 			const result = await response.json();
 
 			if (response.ok) {
+				console.log(result);
 				await goto('/dashboard');
 			} else {
 				errorMessage = result.message;
