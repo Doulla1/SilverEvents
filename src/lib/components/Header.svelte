@@ -29,7 +29,7 @@
 
 		<!-- Desktop Navigation -->
 		<nav class="hidden md:flex space-x-6">
-			{#if $user?.role === 'admin'}
+			{#if $user?.role === 'Admin'}
 				<a href="/dashboard" class="hover:text-indigo-200">Dashboard</a>
 			{/if}
 			<a href="/events" class="hover:text-indigo-200">Événements</a>
@@ -59,7 +59,7 @@
 	<!-- Mobile Navigation -->
 	{#if isMenuOpen}
 		<nav class="md:hidden bg-indigo-700">
-			{#if $user?.role === 'admin'}
+			{#if $user?.role === 'Admin'}
 				<a href="/dashboard" class="block px-4 py-2 text-sm hover:bg-indigo-500">Dashboard</a>
 			{/if}
 			<a href="/events" class="block px-4 py-2 text-sm hover:bg-indigo-500">Événements</a>

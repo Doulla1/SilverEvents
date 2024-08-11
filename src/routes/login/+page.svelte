@@ -19,8 +19,8 @@
 			const result = await response.json();
 
 			if (response.ok) {
-				console.log(result);
 				user.set(result.user); // Mettre à jour le store avec les informations de l'utilisateur
+				user.subscribe((value) => console.log(value));
 				await goto('/dashboard');
 			} else {
 				errorMessage = result.message;
