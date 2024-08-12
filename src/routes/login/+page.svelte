@@ -21,7 +21,14 @@
 			if (response.ok) {
 				user.set(result.user); // Mettre à jour le store avec les informations de l'utilisateur
 				user.subscribe((value) => console.log(value));
-				await goto('/dashboard');
+				// Vérifier le rôle de l'utilisateur
+				if (result.user.role === 'Admin') {
+					await goto('/dashboard'); // Rediriger vers le dashboard si Admin
+				} else if (result.user.role === 'Member') {
+					await goto('/'); // Rediriger vers la page d'accueil si Member
+				} else {
+					errorMessage = 'Rôle utilisateur non reconnu.';
+				}
 			} else {
 				errorMessage = result.message;
 			}
