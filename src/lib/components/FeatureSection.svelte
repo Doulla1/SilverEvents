@@ -3,27 +3,27 @@
 
 	export let features = [
 		{
-			icon: '/icons/admin.svg',
+			icon: '/icons/icons8-administrateur-homme-100.png',
 			title: 'Gestion des Membres',
 			description: 'Les administrateurs peuvent gérer les membres de l\'entreprise et organiser les événements.'
 		},
 		{
-			icon: '/icons/events.svg',
+			icon: '/icons/icons8-fête-100.png',
 			title: 'Création d\'Événements',
 			description: 'Chaque membre peut créer des événements, inviter des collègues et gérer les inscriptions.'
 		},
 		{
-			icon: '/icons/notifications.svg',
+			icon: '/icons/icons8-courrier-100.png',
 			title: 'Notifications par Email',
 			description: 'Tous les membres reçoivent des notifications par email pour les inviter à s\'inscrire aux événements.'
 		},
 		{
-			icon: '/icons/comments.svg',
+			icon: '/icons/icons8-bulle-100.png',
 			title: 'Commentaires',
 			description: 'Les membres peuvent commenter et partager ce qu\'ils apporteront aux événements, comme des boissons ou des collations.'
 		},
 		{
-			icon: '/icons/gallery.svg',
+			icon: '/icons/icons8-galerie-100.png',
 			title: 'Galerie de Souvenirs',
 			description: 'Partagez et consultez les photos des événements passés dans une galerie dédiée.'
 		}
