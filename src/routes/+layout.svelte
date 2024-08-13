@@ -9,7 +9,7 @@
 	<Header />
 
 	<!-- Contenu principal -->
-	<main class="flex-grow container mx-auto px-6 py-8">
+	<main class="flex-grow mx-auto w-full">
 		<slot />
 	</main>
 
