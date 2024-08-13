@@ -6,7 +6,7 @@
 	<div class="container mx-auto px-6 text-center">
 		<div class="columns-2 md:columns-3 gap-2">
 			{#each images as image}
-				<img src={image} alt="Event Image" class="w-full mb-4 rounded-lg shadow-lg" />
+				<img src={image} alt="Event" class="w-full mb-4 rounded-lg shadow-lg" />
 			{/each}
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-// src/hooks.server.ts
+// src/hooks.+server.ts
 import { getUserFromToken } from '$lib/auth/auth';
 import type { Handle } from '@sveltejs/kit';
 

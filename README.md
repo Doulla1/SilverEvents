@@ -26,7 +26,7 @@
 ## Tech Stack
 
 - **Frontend:** [SvelteKit](https://kit.svelte.dev/)
-- **Backend:** SvelteKit (using server-side routes with `++server.ts`)
+- **Backend:** SvelteKit (using server-side routes with `+++server.ts`)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 
 ## Getting Started
