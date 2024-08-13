@@ -35,7 +35,7 @@
 		<h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-12">Découvrez les Fonctionnalités</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{#each features as feature}
-				<FeatureCard icon="{feature.icon}" title="{feature.title}"  description="{feature.description}"  />
+				<FeatureCard icon="{feature.icon}" title="{feature.title}"  description="{feature.description}" />
 			{/each}
 		</div>
 	</div>
