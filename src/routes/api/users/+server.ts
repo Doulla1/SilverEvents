@@ -4,6 +4,7 @@ import { sendResetPasswordEmail } from '$lib/email/registerEmail';
 import { v4 as uuidv4 } from 'uuid';
 import { isAdmin } from '$lib/rbac/accessControl';
 import { json, type RequestHandler } from '@sveltejs/kit';
+import { generateRandomPassword} from '$lib/utils/random';
 
 const prisma = new PrismaClient();
 
@@ -47,7 +48,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 					email,
 					first_name,
 					last_name,
-					password: await hashPassword('ihhfsd_qfe5reGDFq'), // Mot de passe temporaire
+					password: await hashPassword(generateRandomPassword()), // Mot de passe temporaire
 					position,
 					role_id: (await prisma.role.findUnique({ where: { role_name: 'Member' } }))?.id || undefined,
 				}
