@@ -23,7 +23,7 @@
 </script>
 
 <header class="bg-indigo-600 text-white shadow">
-	<div class="container mx-auto px-6 py-4 flex justify-between items-center">
+	<div class="mx-auto px-6 py-4 flex justify-between items-center">
 		<!-- Logo -->
 		<a href="/" class="text-2xl font-bold">SilverEvents</a>
 
