@@ -30,7 +30,7 @@
 	];
 </script>
 
-<section class="py-16 bg-gray-100">
+<section class="py-16">
 	<div class="container mx-auto px-6 text-center">
 		<h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-12">Découvrez les Fonctionnalités</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
