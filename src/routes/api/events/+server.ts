@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 export const POST: RequestHandler = async ({ request, locals }) => {
 	try {
 		// Vérifier que l'utilisateur est connecté
-		const session = locals.session;
-		if (!session) {
+		const user = locals.user;
+		if (!user) {
 			return json({ message: 'Accès refusé. Veuillez vous connecter.' }, { status: 401 });
 		}
 
@@ -26,7 +26,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 				end_date: new Date(end_date),
 				location,
 				cover_image,
-				created_by: session.user.id,
+				created_by: user.id,
 			},
 		});
 
