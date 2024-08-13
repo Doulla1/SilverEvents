@@ -4,6 +4,7 @@
 	import { formatISO } from 'date-fns';
 
 	let title = '';
+	let description = '';
 	let start_date = '';
 	let end_date = '';
 	let location = '';
@@ -56,6 +57,12 @@
 				<label for="title" class="block text-sm font-medium text-gray-700">Titre</label>
 				<input id="title" bind:value={title} type="text" required
 							 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+			</div>
+
+			<div>
+				<label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+				<textarea id="description" bind:value={description} rows="3"
+								 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
 			</div>
 
 			<div>
