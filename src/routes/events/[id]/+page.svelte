@@ -1,8 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { user } from '$lib/stores/user'; // Import du store utilisateur
 
 	let event: any;
+	let currentUser: any = user;
+
+	currentUser.subscribe(value => {
+		currentUser = value;
+	});
+
 
 	onMount(async () => {
 		try {
@@ -10,7 +17,6 @@
 			const data = await res.json();
 			if (res.ok) {
 				event = data.event;
-				console.log(event);
 			} else {
 				// Rediriger en cas d'erreur
 				console.error(data.message);
@@ -19,6 +25,31 @@
 			console.error('Erreur lors de la récupération de l\'événement:', error);
 		}
 	});
+
+	// Fonction pour supprimer l'événement
+	async function deleteEvent() {
+		if (confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) {
+			try {
+				const res = await fetch(`/api/events/${event.id}`, {
+					method: 'DELETE'
+				});
+				if (res.ok) {
+					alert('Événement supprimé avec succès.');
+					// Rediriger après suppression
+					window.location.href = '/events';
+				} else {
+					console.error('Erreur lors de la suppression:', await res.json());
+				}
+			} catch (error) {
+				console.error('Erreur lors de la suppression:', error);
+			}
+		}
+	}
+
+	// Fonction pour éditer l'événement
+	function editEvent() {
+		window.location.href = `/events/${event.id}/edit`; // Rediriger vers la page d'édition
+	}
 </script>
 
 <main class="container mx-auto p-6">
@@ -47,6 +78,18 @@
 				{/each}
 			</ul>
 		</div>
+
+		<!-- Boutons d'édition et de suppression -->
+		{#if currentUser && (currentUser.id === event.creator.id || currentUser.role === 'Admin')}
+			<div class="flex space-x-4">
+				<button on:click={editEvent} class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+					Éditer
+				</button>
+				<button on:click={deleteEvent} class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">
+					Supprimer
+				</button>
+			</div>
+		{/if}
 	{:else}
 		<p class="text-center text-gray-500">Chargement...</p>
 	{/if}
