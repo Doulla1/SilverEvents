@@ -1,4 +1,4 @@
-// src/hooks.server.ts
+// src/hooks.+server.ts
 import { getUserFromToken } from '$lib/auth/auth';
 import type { Handle } from '@sveltejs/kit';
 
@@ -11,13 +11,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const user = await getUserFromToken(token);
 		if (user) {
 			// Stocker l'utilisateur dans `locals`
-			//console.log('Hook server:', user);
 			event.locals.user = user;
-			//console.log('Hook server:', event.locals.user.role_id);
+		}
+		else{
+			// Supprimer le token invalide
+			event.cookies.delete('token', {path: '/', httpOnly: true, secure: true, sameSite: 'strict'});
 		}
 	}
 
 	// Continuer à traiter la requête
-	const response = await resolve(event);
-	return response;
+	return await resolve(event);
 };
