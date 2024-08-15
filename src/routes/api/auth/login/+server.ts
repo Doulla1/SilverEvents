@@ -2,6 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import { comparePassword } from '$lib/auth/auth';
 import { json } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const prisma = new PrismaClient();
 

@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { user as userStore } from '$lib/stores/user'; // Import du store utilisateur
 import { browser } from '$app/environment'; // Vérifie si le code est exécuté côté client
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export async function load({ cookies }) {
 	const token = cookies.get('token');
