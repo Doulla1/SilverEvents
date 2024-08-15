@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { hashPassword } from '$lib/auth/auth';
-import { sendResetPasswordEmail } from '$lib/email/registerEmail';
+import { sendRegisterEmail } from '$lib/email/registerEmail';
 import { v4 as uuidv4 } from 'uuid';
 import { isAdmin } from '$lib/rbac/accessControl';
 import { json, type RequestHandler } from '@sveltejs/kit';
@@ -87,7 +87,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		// Envoyer un email de réinitialisation de mot de passe avec le lien
 		try {
 			const resetLink = `${new URL('/reset-password', request.url).href}?token=${resetToken}&email=${email}`;
-			await sendResetPasswordEmail(email, resetLink);
+			await sendRegisterEmail(email, resetLink);
 		} catch (err) {
 			console.error('Erreur lors de l\'envoi de l\'email de réinitialisation:', err);
 			return json({ message: 'Erreur interne lors de l\'envoi de l\'email de réinitialisation.' }, { status: 500 });
