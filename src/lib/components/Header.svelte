@@ -32,10 +32,11 @@
 			{#if $user?.role === 'Admin'}
 				<a href="/dashboard" class="hover:text-indigo-200">Dashboard</a>
 			{/if}
-			<a href="/events" class="hover:text-indigo-200">Événements</a>
-			<a href="/events/create" class="hover:text-indigo-200">Nouvel Événement</a>
-			<a href="/profile" class="hover:text-indigo-200">Profil</a>
+
 			{#if $user}
+				<a href="/events" class="hover:text-indigo-200">Événements</a>
+				<a href="/events/create" class="hover:text-indigo-200">Nouvel Événement</a>
+				<a href="/profile" class="hover:text-indigo-200">Profil</a>
 				<button on:click={logout} class="hover:text-indigo-200">Déconnexion</button>
 			{/if}
 			{#if !$user}
