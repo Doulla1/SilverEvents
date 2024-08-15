@@ -57,6 +57,9 @@
 					Se connecter
 				</button>
 			</div>
+			<div class="mt-4">
+				<a href="/forgot-password" class="text-sm text-indigo-600 hover:underline">Mot de passe oublié ?</a>
+			</div>
 		</form>
 		{#if errorMessage}
 			<p class="mt-4 text-red-500 text-sm">{errorMessage}</p>
