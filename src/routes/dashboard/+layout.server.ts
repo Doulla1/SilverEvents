@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { redirect } from '@sveltejs/kit';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export async function load({ cookies, locals }) {
 	const token = cookies.get('token');
