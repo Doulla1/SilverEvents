@@ -11,12 +11,18 @@ export const GET: RequestHandler = async ({ params }) => {
 			where: { id: parseInt(params.id) },
 			include: {
 				creator: true, // Inclure les détails du créateur
-				registrations: true, // Inclure les inscriptions
+				registrations: {
+					include: {
+						user: true, // Inclure les détails des utilisateurs inscrits
+					},
+				},
 			},
 		});
+
 		if (!event) {
 			return json({ message: 'Événement non trouvé.' }, { status: 404 });
 		}
+
 		return json({ event }, { status: 200 });
 	} catch (error) {
 		console.log('Erreur lors de la récupération de l\'événement:', error);

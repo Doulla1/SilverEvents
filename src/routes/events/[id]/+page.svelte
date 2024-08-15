@@ -17,6 +17,7 @@
 			const data = await res.json();
 			if (res.ok) {
 				event = data.event;
+				console.log('Événement récupéré:', event);
 			} else {
 				// Rediriger en cas d'erreur
 				console.error(data.message);
@@ -50,6 +51,50 @@
 	function editEvent() {
 		window.location.href = `/events/${event.id}/edit`; // Rediriger vers la page d'édition
 	}
+
+	// Fonction pour s'inscrire à l'événement
+	async function register() {
+		try {
+			const res = await fetch(`/api/events/${event.id}/register`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ user_id: currentUser.id })
+			});
+			if (res.ok) {
+				alert('Inscription réussie.');
+				// Recharger la page pour mettre à jour les inscriptions
+				location.reload();
+			} else {
+				console.error('Erreur lors de l\'inscription:', await res.json());
+			}
+		} catch (error) {
+			console.error('Erreur lors de l\'inscription:', error);
+		}
+	}
+
+	// Fonction pour se désinscrire de l'événement
+	async function unregister() {
+		try {
+			const res = await fetch(`/api/events/${event.id}/unregister`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ user_id: currentUser.id })
+			});
+			if (res.ok) {
+				alert('Désinscription réussie.');
+				// Recharger la page pour mettre à jour les inscriptions
+				location.reload();
+			} else {
+				console.error('Erreur lors de la désinscription:', await res.json());
+			}
+		} catch (error) {
+			console.error('Erreur lors de la désinscription:', error);
+		}
+	}
 </script>
 
 <main class="container mx-auto p-6">
@@ -78,6 +123,17 @@
 				{/each}
 			</ul>
 		</div>
+
+		<!-- Boutons d'inscription ou de désinscription si inscris -->
+		{#if currentUser && event.registrations.some(registration => registration.user.id === currentUser.id)}
+			<button class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600" on:click={unregister}>
+				Se désinscrire
+			</button>
+		{:else}
+			<button class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600" on:click={register}>
+				S'inscrire
+			</button>
+		{/if}
 
 		<!-- Boutons d'édition et de suppression -->
 		{#if currentUser && (currentUser.id === event.creator.id || currentUser.role === 'Admin')}
