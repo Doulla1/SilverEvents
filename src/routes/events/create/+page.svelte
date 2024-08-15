@@ -8,7 +8,7 @@
 	let start_date = '';
 	let end_date = '';
 	let location = '';
-	let cover_image = '';
+	let cover_image: File | null = null;  // Le fichier d'image téléversé
 	let errorMessage = '';
 	let successMessage = '';
 
@@ -27,12 +27,20 @@
 				return;
 			}
 
+			// Utiliser FormData pour envoyer les données du formulaire et le fichier
+			const formData = new FormData();
+			formData.append('title', title);
+			formData.append('description', description);
+			formData.append('start_date', start_date);
+			formData.append('end_date', end_date);
+			formData.append('location', location);
+			if (cover_image) {
+				formData.append('cover_image', cover_image);
+			}
+
 			const response = await fetch('/api/events', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ title, start_date, end_date, location, cover_image })
+				body: formData
 			});
 
 			const result = await response.json();
@@ -62,7 +70,7 @@
 			<div>
 				<label for="description" class="block text-sm font-medium text-gray-700">Description</label>
 				<textarea id="description" bind:value={description} rows="3"
-								 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+									class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
 			</div>
 
 			<div>
@@ -84,8 +92,9 @@
 			</div>
 
 			<div>
-				<label for="cover_image" class="block text-sm font-medium text-gray-700">Image de Couverture (URL)</label>
-				<input id="cover_image" bind:value={cover_image} type="url"
+				<label for="cover_image" class="block text-sm font-medium text-gray-700">Image de Couverture</label>
+				<input id="cover_image" type="file" accept="image/*"
+							 on:change={(e) => cover_image = e.target.files ? e.target.files[0] : null}
 							 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
 			</div>
 
