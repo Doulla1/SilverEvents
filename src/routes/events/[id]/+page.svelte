@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { user } from '$lib/stores/user'; // Import du store utilisateur
+	import { user } from '$lib/stores/user';
 
 	let event: any;
 	let currentUser: any = user;
