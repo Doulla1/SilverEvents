@@ -12,14 +12,12 @@ export const GET: RequestHandler = async ({ params }) => {
 				registrations: true, // Inclure les inscriptions
 			},
 		});
-
 		if (!event) {
 			return json({ message: 'Événement non trouvé.' }, { status: 404 });
 		}
-
 		return json({ event }, { status: 200 });
 	} catch (error) {
-		console.error('Erreur lors de la récupération de l\'événement:', error);
+		console.log('Erreur lors de la récupération de l\'événement:', error);
 		return json({ message: 'Une erreur est survenue.' }, { status: 500 });
 	}
 };

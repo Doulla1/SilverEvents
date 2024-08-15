@@ -20,8 +20,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		const start_date = formData.get('start_date') as string;
 		const end_date = formData.get('end_date') as string;
 		const location = formData.get('location') as string;
-
-		// Récupérer le fichier téléversé
 		const coverImageFile = formData.get('cover_image') as File;
 
 		if (!title || !start_date || !end_date || !location) {
@@ -47,7 +45,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 			cover_image = `/uploads/events/${coverImageFile.name}`;
 		}
 
-		// Créer l'événement dans la base de données
+		// Créer l'événement dans la base de donnée
 		const event = await prisma.event.create({
 			data: {
 				title,
