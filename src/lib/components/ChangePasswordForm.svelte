@@ -33,7 +33,7 @@
 	}
 </script>
 
-<div class="bg-white p-6 rounded-lg shadow-md mt-6">
+<div class="bg-white p-6 rounded-lg shadow-md">
 	<h2 class="text-xl font-semibold mb-4">Changer de mot de passe</h2>
 	<form on:submit|preventDefault={changePassword} class="space-y-4">
 		<div>

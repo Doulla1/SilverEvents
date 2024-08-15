@@ -51,6 +51,10 @@ export const POST = async ({ request, cookies }) => {
 				user: {
 					id: user.id,
 					email: user.email,
+					first_name: user.first_name,
+					last_name: user.last_name,
+					profile_photo: user.profile_photo,
+					position: user.position,
 					role: user.role.role_name
 				}
 			}, { status: 200 });
