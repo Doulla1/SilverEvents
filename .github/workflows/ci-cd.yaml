@@ -78,10 +78,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/vhosts/silver-events.fr/SilverEvents/
+            pwd
             
             git pull origin main
             
-            ${NODE_BIN_PATH}npm ci
+            /var/www/vhosts/silver-events.fr/.nodenv/shims/npm ci
             ${NODE_BIN_PATH}npm run build
             ${NODE_BIN_PATH}npx prisma migrate deploy --schema=./prisma/schema.production.prisma
             ${NODE_BIN_PATH}node --env-file=.env build
