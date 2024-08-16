@@ -58,25 +58,36 @@ jobs:
           path: .svelte-kit
 
   deploy:
-    runs-on: ubuntu-latest
-    needs: build
+    runs-on: ubuntu-latest   # Utiliser l'image Ubuntu la plus récente comme environnement d'exécution
+
+    environment:
+      name: 'MyPlesk'   # Nom de l'environnement de déploiement
 
     steps:
-      - name: Checkout code
+      - name: Checkout code   # Étape pour récupérer le code source depuis le dépôt GitHub
         uses: actions/checkout@v3
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
+      - name: Deploy to Server   # Étape pour déployer sur le serveur
+        uses: appleboy/ssh-action@master   # Utiliser l'action SSH pour effectuer le déploiement
         with:
-          name: build
-
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Sync files to server
-        run: rsync -avz --delete .svelte-kit/ user@server:/path/to/deployment/
-
-      - name: Restart server
-        run: ssh user@server 'pm2 restart all'
+          host: ${{ secrets.SERVER_HOST }}   # Adresse IP ou nom d'hôte du serveur
+          username: ${{ secrets.SERVER_USERNAME }}   # Nom d'utilisateur pour la connexion SSH
+          key: ${{ secrets.SSH_PRIVATE_KEY }}   # Clé privée SSH pour l'authentification
+          script: |
+            # Naviguer dans le répertoire du projet sur le serveur
+            cd /var/www/vhosts/silver-events.fr/SilverEvents/
+            
+            # Mettre à jour le code source depuis la branche principale
+            git pull origin main
+            
+            # Installer les dépendances du projet
+            npm ci
+            
+            # Compiler le projet SvelteKit
+            npm run build
+            
+            # Exécuter les migrations Prisma pour MySQL
+            npx prisma migrate deploy
+            
+            # Redémarrer l'application SvelteKit (assurez-vous que vous utilisez un gestionnaire de processus comme PM2)
+            pm2 restart all
