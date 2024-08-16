@@ -83,6 +83,6 @@ jobs:
             git pull origin main
             
             ${NODE_BIN_PATH}npm ci
-            ${NODE_BIN_PATH}npm run build
-            ${NODE_BIN_PATH}npx prisma migrate deploy
-            ${NODE_BIN_PATH}node --env-file=.env build
+            #${NODE_BIN_PATH}npm run build
+            #${NODE_BIN_PATH}npx prisma migrate deploy
+            #${NODE_BIN_PATH}node --env-file=.env build
