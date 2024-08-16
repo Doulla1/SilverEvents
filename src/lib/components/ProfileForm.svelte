@@ -12,6 +12,8 @@
 
 	// Fonction pour soumettre les modifications
 	async function updateProfile() {
+		console.log("Before update");
+		console.log(userData);
 		try {
 			const response = await fetch('/api/profile', {
 				method: 'PUT',

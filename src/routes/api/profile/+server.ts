@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { hashPassword, comparePassword } from '$lib/auth/auth';
 import { json, fail, type RequestHandler } from '@sveltejs/kit';
 
 const prisma = new PrismaClient();
@@ -9,10 +8,19 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
 		const user = locals.user;
 		if (!user) return fail(401, { message: 'Non autorisé.' });
 
-		const data = await request.json();
+		// Obtenez les données de la requête
+		const { first_name, last_name, email, profile_photo, position } = await request.json();
+
+		// Mettez à jour uniquement les champs autorisés
 		const updatedUser = await prisma.user.update({
 			where: { id: user.id },
-			data,
+			data: {
+				first_name,
+				last_name,
+				email,
+				profile_photo,
+				position,
+			},
 		});
 
 		return json({ user: updatedUser });
@@ -21,5 +29,3 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
 		return fail(500, { message: 'Une erreur est survenue.' });
 	}
 };
-
-
