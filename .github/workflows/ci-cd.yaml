@@ -82,5 +82,5 @@ jobs:
             
             /var/www/vhosts/silver-events.fr/.nodenv/shims/npm ci
             /var/www/vhosts/silver-events.fr/.nodenv/shims/npm run build
-            /var/www/vhosts/silver-events.fr/.nodenv/shims/npx prisma migrate deploy --schema=./prisma/schema.production.prisma
+            /var/www/vhosts/silver-events.fr/.nodenv/shims/npx prisma migrate deploy
             /var/www/vhosts/silver-events.fr/.nodenv/shims/node --env-file=.env build
