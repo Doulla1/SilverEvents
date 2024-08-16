@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      #      - name: Run Linter
-      #        run: npm run lint
-
       - name: Run Tests
         run: npm test
 
@@ -83,4 +80,3 @@ jobs:
             /var/www/vhosts/silver-events.fr/.nodenv/shims/npm ci
             /var/www/vhosts/silver-events.fr/.nodenv/shims/npm run build
             /var/www/vhosts/silver-events.fr/.nodenv/shims/npx prisma migrate deploy
-            /var/www/vhosts/silver-events.fr/.nodenv/shims/node --env-file=.env build
