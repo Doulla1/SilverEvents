@@ -1,10 +1,8 @@
-
-
 # Silver-Events : Event Management Application
 
 ## Overview
 
-**SilverEvents** is designed for corporate employees to manage and participate in events within their organization. Administrators can create employee accounts, who then receive an email with a token to reset their password. Once logged in, employees can create or join events organized by others. The application also provides profile management, event registration, and comprehensive event filtering capabilities.
+**SilverEvents** is designed for corporate employees to manage and participate in events within their organization. Administrators can create employee accounts, who then receive an email with a token to reset their password. Once logged in, employees can create or join events organized by others. The application also provides profile management.
 
 ## Key Features
 
@@ -65,29 +63,32 @@ Before you begin, ensure you have the following installed on your local machine:
 
 3. **Set up environment variables:**
 
-   Create a `.env` file in the root directory and populate it with your database and application credentials:
+    Instead of manually creating a `.env` file from scratch, it's recommended to make a copy of the `.env.example` file provided in the repository. This ensures that you have all the required environment variables with the correct structure.
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    After copying, open the new `.env` file and replace the placeholders with your actual credentials:
 
     ```env
     AUTH_SECRET="your_secret_key" # Generate a random string for this
-    ADMIN_EMAIL=admin@email.exemple
+    ADMIN_EMAIL=admin@email.example
     ADMIN_PASSWORD=admin_password
     ADMIN_FIRST_NAME=admin_firstname
     ADMIN_LAST_NAME=admin_lastname
     DATABASE_URL="postgresql://username:password@localhost:5432/dbname?schema=public" 
     ```
 
-   Replace `username`, `password`, `dbname`, and other placeholders with your actual credentials.
-
+    Replace `your_secret_key`, `admin_password`, `admin_firstname`, `admin_lastname`, `username`, `password`, `dbname`, and other placeholders with your actual data.
 
 4. **Set up the database:**
 
-   Create a new MYSQL database and update the `DATABASE_URL` in the `.env` file with the connection string.
-
+   Create a new PostgreSQL database and update the `DATABASE_URL` in the `.env` file with the correct connection string.
 
 5. **Configure your mail server:**
 
-   Update the `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, and `MAIL_PASSWORD` environment variables in the `.env` file with your SMTP server credentials. 
-
+   Update the `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, and `MAIL_PASSWORD` environment variables in the `.env` file with your SMTP server credentials.
 
 6. **Run database migrations:**
 
@@ -96,8 +97,8 @@ Before you begin, ensure you have the following installed on your local machine:
     ```bash
     npx prisma migrate dev --name init
     ```
-    This command will create a new migration with the name `init` and apply it to the database.
 
+    This command will create a new migration with the name `init` and apply it to the database.
 
 7. **Seed the database:**
 
@@ -106,7 +107,8 @@ Before you begin, ensure you have the following installed on your local machine:
     ```bash
     npm run seed
     ```
-    This command will create the admin and member roles then an admin user with the credentials specified in the `.env` file.
+
+    This command will create the admin and member roles, then an admin user with the credentials specified in the `.env` file.
 
 ### Running the Application
 
